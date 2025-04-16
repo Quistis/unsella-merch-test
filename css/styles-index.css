@@ -57,15 +57,11 @@ body {
 .image-wrapper {
   position: relative;
   display: inline-block;
+
+  overflow: hidden;
 }
 
 .image {
-  /* position: static;
-  display: block;
-  width: 350px;
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px; */
   position: static;
 
   display: block;
@@ -76,14 +72,41 @@ body {
   height: auto;
 
   border-radius: 10px;
+
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.image-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform-origin: bottom center;
+  animation: waveRevealMask 2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes waveRevealMask {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 
 /* Стиль для подписи */
 .caption {
   margin: 0;
   padding-top: 100px;
-  /* margin-bottom: 320px; */
-  /* font-size: 1.2rem; */
+
   font-size: 120px;
   font-weight: 900;
   color: #fff;
